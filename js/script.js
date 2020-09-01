@@ -1,10 +1,15 @@
 'use strict';
 
-let incr = 10,
-    decr = 10;
+let i = true;
 
-incr++;
-decr--;
+while (i) {
 
-console.log(`Инкремент ${incr}\nДекремент ${decr}`);
+    const numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели ?', 'Число');
 
+    if (isNaN(numberOfFilms)) {
+        alert('Только числа');
+    } else {
+        i = false;
+        document.querySelector('.inst').innerHTML = `Количество просмотренных вами фильмов: ${numberOfFilms}`;
+    }
+}
