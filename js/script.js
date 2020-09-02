@@ -1,8 +1,6 @@
 'use strict';
 
-let i = true;
-
-let personalMovieDB = {
+const personalMovieDB = {
 
     count: 0,
     movies: {},
@@ -12,37 +10,21 @@ let personalMovieDB = {
 
 };
 
-while (i) {
+const numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели ?', 'Число');
+const lastMovie = prompt('Какой последний фильм вы посмотрели ?', 'Название фильма');
+const userRaitingMovie = +prompt('Оцените этот фильм от 1 до 10', '1-10');
 
-    const numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели ?', 'Число');
-
-    if (isNaN(numberOfFilms)) {
-        alert('Только числа');
-    } else {
-        personalMovieDB.count = numberOfFilms;
-        i = false;
-        
-        document.querySelector('.inst').innerHTML = `Количество просмотренных вами фильмов: ${personalMovieDB.count}`;
-    }
-}
-
-i = true;
-
-while (i) {
-    const lastMovie = prompt('Какой последний фильм вы посмотрели ?', 'Название фильма');
-    const userRaitingMovie = prompt('Оцените этот фильм от 1 до 10', '1-10');
-
-
-    if (isNaN(userRaitingMovie)) {
-        alert('В оценке только числа');
-    } else {
-        i = false;
-        personalMovieDB.movies = {
-            name: lastMovie,
-            raiting: userRaitingMovie
-        };
-
-    }
+if (isNaN(numberOfFilms) || isNaN(userRaitingMovie) || !Number.isInteger(numberOfFilms) || userRaitingMovie > 10) {
+    document.querySelector('.inst').innerHTML = `Количество фильмов и оценку вводите числом`;
+} else {
+    personalMovieDB.count = Math.abs(numberOfFilms);
+    personalMovieDB.movies = {
+        name: lastMovie,
+        raiting: Math.abs(userRaitingMovie)
+    };
+    document.querySelector('.inst').innerHTML = `Количество просмотренных вами фильмов: ${personalMovieDB.count}<br/> 
+                                             Название фильма: ${personalMovieDB.movies.name}<br/>
+                                             Ваша оценка: ${personalMovieDB.movies.raiting} из 10`;
 }
 
 console.log(personalMovieDB);
